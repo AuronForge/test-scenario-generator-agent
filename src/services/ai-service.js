@@ -1,0 +1,68 @@
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+
+export class AIService {
+  constructor(provider = 'openai') {
+    this.provider = provider;
+    
+    if (provider === 'openai') {
+      this.client = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY
+      });
+      this.model = process.env.OPENAI_MODEL || 'gpt-4-turbo-preview';
+    } else if (provider === 'anthropic') {
+      this.client = new Anthropic({
+        apiKey: process.env.ANTHROPIC_API_KEY
+      });
+      this.model = process.env.ANTHROPIC_MODEL || 'claude-3-5-sonnet-20241022';
+    }
+  }
+
+  async generateCompletion(prompt, options = {}) {
+    try {
+      if (this.provider === 'openai') {
+        return await this.generateOpenAICompletion(prompt, options);
+      } else if (this.provider === 'anthropic') {
+        return await this.generateAnthropicCompletion(prompt, options);
+      }
+    } catch (error) {
+      throw new Error(`AI Service Error: ${error.message}`);
+    }
+  }
+
+  async generateOpenAICompletion(prompt, options) {
+    const response = await this.client.chat.completions.create({
+      model: this.model,
+      messages: [
+        {
+          role: 'system',
+          content: 'You are an expert QA engineer specialized in creating comprehensive test scenarios.'
+        },
+        {
+          role: 'user',
+          content: prompt
+        }
+      ],
+      temperature: options.temperature || 0.7,
+      response_format: { type: "json_object" }
+    });
+
+    return response.choices[0].message.content;
+  }
+
+  async generateAnthropicCompletion(prompt, options) {
+    const response = await this.client.messages.create({
+      model: this.model,
+      max_tokens: options.maxTokens || 4096,
+      messages: [
+        {
+          role: 'user',
+          content: prompt
+        }
+      ],
+      system: 'You are an expert QA engineer specialized in creating comprehensive test scenarios. Always respond with valid JSON.'
+    });
+
+    return response.content[0].text;
+  }
+}
