@@ -15,6 +15,7 @@ This is the first agent in a multi-agent system designed to automate software de
 - ✅ Coverage analysis
 - ✅ Hosted on Vercel for easy deployment
 - ✅ RESTful API
+- ✅ **Comprehensive unit tests with >70% coverage**
 
 ## Installation
 
@@ -34,6 +35,45 @@ OPENAI_MODEL=gpt-4-turbo-preview
 ANTHROPIC_API_KEY=your_anthropic_key
 ANTHROPIC_MODEL=claude-3-5-sonnet-20241022
 ```
+
+## Testing
+
+### Run all tests
+```bash
+npm test
+```
+
+### Run tests in watch mode
+```bash
+npm run test:watch
+```
+
+### Generate coverage report
+```bash
+npm run test:coverage
+```
+
+### Test Structure
+```
+tests/
+├── schemas/
+│   ├── feature-schema.test.js
+│   └── test-scenario-schema.test.js
+├── agents/
+│   └── qa-agent.test.js
+├── services/
+│   └── ai-service.test.js
+├── prompts/
+│   └── test-generation-prompt.test.js
+└── api/
+    └── generate-tests.test.js
+```
+
+### Coverage Thresholds
+- Branches: 70%
+- Functions: 70%
+- Lines: 70%
+- Statements: 70%
 
 ## Usage
 
@@ -100,6 +140,10 @@ Deploy to Vercel:
 ```bash
 vercel deploy
 ```
+
+## CI/CD
+
+Tests are automatically run on every push. Coverage reports are generated and must meet minimum thresholds.
 
 ## Future Agents
 
