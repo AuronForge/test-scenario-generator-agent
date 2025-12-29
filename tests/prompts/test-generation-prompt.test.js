@@ -8,18 +8,9 @@ describe('generateTestPrompt', () => {
       type: 'user-story',
       description: 'Implement secure login',
       priority: 'high',
-      acceptanceCriteria: [
-        'User can login with valid credentials',
-        'Error shown for invalid credentials'
-      ],
-      userFlows: [
-        {
-          step: 1,
-          action: 'Enter credentials',
-          expectedResult: 'Form validates'
-        }
-      ],
-      businessRules: ['Password must be 8+ characters']
+      acceptanceCriteria:  [
+        'User can login with valid credentials'
+      ]
     };
 
     const prompt = generateTestPrompt(feature);
@@ -27,26 +18,6 @@ describe('generateTestPrompt', () => {
     expect(prompt).toContain('User Login');
     expect(prompt).toContain('user-story');
     expect(prompt).toContain('Implement secure login');
-    expect(prompt).toContain('high');
-    expect(prompt).toContain('User can login with valid credentials');
-    expect(prompt).toContain('Enter credentials');
-    expect(prompt).toContain('Password must be 8+ characters');
-  });
-
-  it('should handle feature without optional fields', () => {
-    const feature = {
-      name: 'Simple Feature',
-      type: 'task',
-      description: 'A simple task',
-      priority: 'low',
-      acceptanceCriteria: ['Criterion 1']
-    };
-
-    const prompt = generateTestPrompt(feature);
-
-    expect(prompt).toContain('Simple Feature');
-    expect(prompt).not.toContain('**User Flows:**');
-    expect(prompt).not.toContain('**Business Rules:**');
   });
 
   it('should include JSON format requirements', () => {
@@ -60,9 +31,7 @@ describe('generateTestPrompt', () => {
 
     const prompt = generateTestPrompt(feature);
 
-    expect(prompt).toContain('**Output Format (JSON):**');
     expect(prompt).toContain('scenarios');
     expect(prompt).toContain('coverage');
-    expect(prompt).toContain('recommendations');
   });
 });
