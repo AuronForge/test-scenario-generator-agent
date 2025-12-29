@@ -1,5 +1,5 @@
 {
-  "name": "ai-qa-agent",
+  "name": "test-scenario-generator-agent",
   "version": "1.0.0",
   "description": "AI Agent for automated test scenario generation",
   "main": "api/generate-tests.js",
