@@ -1,0 +1,26 @@
+import { z } from 'zod';
+
+export const FeatureSchema = z.object({
+  id: z.string().optional(),
+  name: z.string().min(1, "Feature name is required"),
+  description: z.string().min(10, "Description must be detailed"),
+  type: z.enum(['user-story', 'epic', 'task', 'bug-fix']),
+  acceptanceCriteria: z.array(z.string()).min(1, "At least one acceptance criteria required"),
+  technicalDetails: z.object({
+    endpoints: z.array(z.string()).optional(),
+    components: z.array(z.string()).optional(),
+    dependencies: z.array(z.string()).optional()
+  }).optional(),
+  userFlows: z.array(z.object({
+    step: z.number(),
+    action: z.string(),
+    expectedResult: z.string()
+  })).optional(),
+  businessRules: z.array(z.string()).optional(),
+  priority: z.enum(['low', 'medium', 'high', 'critical']).default('medium'),
+  metadata: z.record(z.any()).optional()
+});
+
+export const validateFeature = (data) => {
+  return FeatureSchema.parse(data);
+};
