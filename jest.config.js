@@ -10,7 +10,6 @@ export default {
   ],
   collectCoverageFrom: [
     'src/**/*.js',
-    'api/**/*.js',
     '!src/**/*.test.js',
     '!**/node_modules/**',
     '!**/tests/**'

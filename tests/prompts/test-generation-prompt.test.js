@@ -34,4 +34,42 @@ describe('generateTestPrompt', () => {
     expect(prompt).toContain('scenarios');
     expect(prompt).toContain('coverage');
   });
+
+  it('should include optional userFlows when provided', () => {
+    const feature = {
+      name: 'Test',
+      type: 'task',
+      description: 'Test description',
+      priority: 'medium',
+      acceptanceCriteria: ['Test'],
+      userFlows: [
+        {
+          step: 1,
+          action: 'Test action',
+          expectedResult: 'Test result'
+        }
+      ]
+    };
+
+    const prompt = generateTestPrompt(feature);
+
+    expect(prompt).toContain('User Flows:');
+    expect(prompt).toContain('Test action');
+  });
+
+  it('should include optional businessRules when provided', () => {
+    const feature = {
+      name: 'Test',
+      type: 'task',
+      description: 'Test description',
+      priority: 'medium',
+      acceptanceCriteria: ['Test'],
+      businessRules: ['Rule 1', 'Rule 2']
+    };
+
+    const prompt = generateTestPrompt(feature);
+
+    expect(prompt).toContain('Business Rules:');
+    expect(prompt).toContain('Rule 1');
+  });
 });
