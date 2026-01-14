@@ -10,6 +10,12 @@ export class AIService {
         apiKey: process.env.OPENAI_API_KEY
       });
       this.model = process.env.OPENAI_MODEL || 'gpt-4-turbo-preview';
+    } else if (provider === 'github') {
+      this.client = new OpenAI({
+        apiKey: process.env.GITHUB_TOKEN,
+        baseURL: 'https://models.inference.ai.azure.com'
+      });
+      this.model = process.env.GITHUB_MODEL || 'gpt-4o';
     } else if (provider === 'anthropic') {
       this.client = new Anthropic({
         apiKey: process.env.ANTHROPIC_API_KEY
@@ -20,7 +26,7 @@ export class AIService {
 
   async generateCompletion(prompt, options = {}) {
     try {
-      if (this.provider === 'openai') {
+      if (this.provider === 'openai' || this.provider === 'github') {
         return await this.generateOpenAICompletion(prompt, options);
       } else if (this.provider === 'anthropic') {
         return await this.generateAnthropicCompletion(prompt, options);

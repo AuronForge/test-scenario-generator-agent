@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const TestScenarioSchema = z.object({
   scenarioId: z.string(),
   title: z.string(),
-  type: z.enum(['functional', 'integration', 'e2e', 'unit', 'edge-case', 'negative']),
+  type: z.string(), // Aceita qualquer string incluindo valores combinados
   priority: z.enum(['low', 'medium', 'high', 'critical']),
   description: z.string(),
   preconditions: z.array(z.string()),
