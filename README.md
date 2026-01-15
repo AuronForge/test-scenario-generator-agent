@@ -185,6 +185,44 @@ ci: add commitlint validation
 **Pre-commit**: Roda lint e testes antes do commit
 **Commit-msg**: Valida formato da mensagem de commit
 
+## Versionamento e Changelog
+
+O projeto utiliza **standard-version** para versionamento automático seguindo o [Semantic Versioning](https://semver.org/):
+
+### Gerando Releases
+
+```bash
+# Release automático (detecta o tipo baseado nos commits)
+npm run release
+
+# Release específico
+npm run release:patch  # 1.0.0 → 1.0.1 (bug fixes)
+npm run release:minor  # 1.0.0 → 1.1.0 (new features)
+npm run release:major  # 1.0.0 → 2.0.0 (breaking changes)
+```
+
+### O que acontece em um release:
+
+1. ✅ Analisa commits desde a última tag
+2. ✅ Determina a nova versão (semver)
+3. ✅ Atualiza `package.json` com nova versão
+4. ✅ Gera/atualiza `CHANGELOG.md`
+5. ✅ Cria commit de release
+6. ✅ Cria tag git
+
+### Após o release:
+
+```bash
+git push --follow-tags origin main
+```
+
+### Tipos de commit e impacto na versão:
+
+- `feat:` → **MINOR** version (1.0.0 → 1.1.0)
+- `fix:` → **PATCH** version (1.0.0 → 1.0.1)
+- `BREAKING CHANGE:` → **MAJOR** version (1.0.0 → 2.0.0)
+- `docs:`, `style:`, `refactor:`, `test:`, `ci:` → Não afetam versão
+
 ## Usage
 
 ### Local Development

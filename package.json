@@ -12,6 +12,10 @@
     "lint": "eslint src/ api/ tests/",
     "lint:fix": "eslint src/ api/ tests/ --fix",
     "prepare": "husky",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
+    "release:patch": "standard-version --release-as patch",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
@@ -38,6 +42,7 @@
     "eslint-plugin-prettier": "^5.5.5",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
-    "prettier": "^3.8.0"
+    "prettier": "^3.8.0",
+    "standard-version": "^9.5.0"
   }
 }
