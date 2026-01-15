@@ -46,6 +46,12 @@ describe('scenario.repository', () => {
       expect(result.scenarios[0].id).toBe('1');
       expect(result.scenarios[1].id).toBe('2');
     });
+
+    it('should create database file with empty scenarios if not exists', () => {
+      const result = scenarioRepository.findAll(testDbPath);
+      expect(fs.existsSync(testDbPath)).toBe(true);
+      expect(result.scenarios).toEqual([]);
+    });
   });
 
   describe('findById', () => {

@@ -98,6 +98,13 @@ describe('Scenario Database', () => {
       expect(db.scenarios[0].feature.name).toBe('Feature 1');
       expect(db.scenarios[1].feature.name).toBe('Feature 2');
     });
+
+    it('should use default provider if not specified', () => {
+      const featureData = { name: 'Test Feature' };
+      const saved = saveScenario(featureData, {});
+
+      expect(saved.provider).toBe('openai');
+    });
   });
 
   describe('getScenarioById', () => {

@@ -146,6 +146,24 @@ describe('QAAgent', () => {
       expect(result.success).toBe(false);
       expect(result.error).toContain('Failed to parse AI response');
     });
+
+    it('should handle AI service errors', async () => {
+      const agent = new QAAgent();
+      const feature = {
+        name: 'Test Feature',
+        description: 'Test description',
+        acceptanceCriteria: ['Criterion 1'],
+      };
+
+      // Mock the AI service to throw error
+      agent.aiService.generateCompletion = async () => {
+        throw new Error('AI service error');
+      };
+
+      const result = await agent.generateTestScenarios(feature);
+      expect(result.success).toBe(false);
+      expect(result.error).toBeDefined();
+    });
   });
 
   describe('analyzeCoverage', () => {
@@ -162,6 +180,23 @@ describe('QAAgent', () => {
       expect(coverage.total).toBe(2);
       expect(coverage.covered).toBeDefined();
       expect(coverage.gaps).toBeDefined();
+    });
+
+    it('should handle empty acceptance criteria', async () => {
+      const agent = new QAAgent();
+      const testSuite = { scenarios: [] };
+      const feature = { acceptanceCriteria: [] };
+
+      const coverage = await agent.analyzeCoverage(testSuite, feature);
+      expect(coverage.total).toBe(0);
+    });
+
+    it('should handle null test suite', async () => {
+      const agent = new QAAgent();
+      const feature = { acceptanceCriteria: ['Criterion 1'] };
+
+      const coverage = await agent.analyzeCoverage(null, feature);
+      expect(coverage).toBeDefined();
     });
   });
 });
