@@ -228,7 +228,46 @@ vercel deploy
 
 ## CI/CD
 
-Tests are automatically run on every push. Coverage reports are generated and must meet minimum thresholds.
+### Automated Pipeline
+
+O projeto inclui um pipeline automatizado no GitHub Actions que:
+
+1. **Executa testes automaticamente** em cada push/PR para a branch `main`
+2. **Valida cobertura de testes**: a média de cobertura (statements, branches, functions, lines) deve ser ≥ 95%
+3. **Bloqueia deploy** se a cobertura estiver abaixo do threshold
+4. **Deploy automático** para Vercel após testes passarem
+
+### Configuração dos Secrets
+
+Para ativar o pipeline, configure os seguintes secrets no GitHub:
+
+```
+VERCEL_TOKEN          # Token de deploy do Vercel
+VERCEL_ORG_ID         # ID da organização no Vercel
+VERCEL_PROJECT_ID     # ID do projeto no Vercel
+CODECOV_TOKEN         # (Opcional) Token do Codecov para relatórios
+```
+
+**Como obter os valores:**
+
+1. **VERCEL_TOKEN**: Vercel Dashboard → Settings → Tokens → Create Token
+2. **VERCEL_ORG_ID** e **VERCEL_PROJECT_ID**: Execute `vercel link` no projeto
+3. **CODECOV_TOKEN**: codecov.io → Add Repository
+
+### Status do Coverage Atual
+
+- **Statements**: 97.72%
+- **Branches**: 97.67%
+- **Functions**: 100%
+- **Lines**: 97.22%
+- **Average**: 98.15% ✅
+
+### Rodando testes localmente
+
+```bash
+npm test              # Testes unitários
+npm run test:coverage # Testes com relatório de cobertura
+```
 
 ## Future Agents
 
