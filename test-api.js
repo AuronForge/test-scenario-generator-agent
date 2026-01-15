@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const data = fs.readFileSync('examples/feature-example.json', 'utf8');
+const data = fs.readFileSync('tests/mocks/feature-example.json', 'utf8');
 
 const url = 'http://localhost:3000/api/generate-scenarios';
 

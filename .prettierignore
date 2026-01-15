@@ -5,5 +5,5 @@ coverage
 *.log
 .vercel
 .env
-results/
+database/
 package-lock.json

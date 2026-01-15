@@ -1,8 +1,5 @@
 import { QAAgent } from '../agents/qa-agent.js';
 import * as scenarioRepository from '../repositories/scenario.repository.js';
-import path from 'path';
-import { generateFeatureFilename } from '../utils/sanitize.utils.js';
-import { saveJsonFile } from '../utils/file.utils.js';
 
 /**
  * Generate test scenarios for a feature
@@ -19,30 +16,13 @@ export const generateScenarios = async (featureData, provider = 'openai') => {
   }
 
   // Save to database
-  let savedEntry = null;
   try {
-    savedEntry = scenarioRepository.create(featureData, result.data, provider);
+    const savedEntry = scenarioRepository.create(featureData, result.data, provider);
+    result.id = savedEntry.id;
     console.log(`✅ Cenário salvo no banco de dados com ID: ${savedEntry.id}`);
   } catch (dbError) {
     console.error('⚠️ Erro ao salvar no banco de dados:', dbError.message);
-  }
-
-  // Save to file
-  try {
-    const resultsDir = path.join(process.cwd(), 'results');
-    const fileName = generateFeatureFilename(featureData.name);
-    const filePath = path.join(resultsDir, fileName);
-
-    saveJsonFile(filePath, result);
-
-    result.savedTo = fileName;
-    if (savedEntry) {
-      result.id = savedEntry.id;
-    }
-
-    console.log(`✅ Resultado salvo em: ${filePath}`);
-  } catch (saveError) {
-    console.error('⚠️ Erro ao salvar arquivo:', saveError.message);
+    throw new Error(`Failed to save scenario: ${dbError.message}`);
   }
 
   return result;

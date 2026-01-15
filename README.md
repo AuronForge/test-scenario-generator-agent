@@ -17,7 +17,7 @@ This is the first agent in a multi-agent system designed to automate software de
 - ✅ Coverage analysis
 - ✅ Hosted on Vercel for easy deployment
 - ✅ RESTful API with **Swagger documentation**
-- ✅ Auto-save results to JSON files
+- ✅ Auto-save to database
 - ✅ **Comprehensive unit tests with >70% coverage**
 
 ## 📚 API Documentation
@@ -303,7 +303,7 @@ The server will start at `http://localhost:3000`
 curl -X POST http://localhost:3000/api/generate-scenarios \
   -H "Content-Type: application/json" \
   -H "x-ai-provider: github" \
-  -d @examples/feature-example.json
+  -d @tests/mocks/feature-example.json
 ```
 
 **Using OpenAI:**
@@ -312,7 +312,7 @@ curl -X POST http://localhost:3000/api/generate-scenarios \
 curl -X POST http://localhost:3000/api/generate-scenarios \
   -H "Content-Type: application/json" \
   -H "x-ai-provider: openai" \
-  -d @examples/feature-example.json
+  -d @tests/mocks/feature-example.json
 ```
 
 **List all scenarios:**
@@ -344,7 +344,7 @@ const agent = new QAAgent('github');
 const result = await agent.generateTestScenarios(featureData);
 console.log(result.data.scenarios);
 
-// Results are automatically saved to results/feature-{name}.json
+// Results are automatically saved to database/scenarios.json
 ```
 
 ## API Documentation
@@ -500,7 +500,7 @@ Generate test scenarios from a feature specification.
 }
 ```
 
-**Note**: Results are automatically saved to the `results/` directory.
+**Note**: Results are automatically saved to the database at `database/scenarios.json`.
 
 ## Schema
 

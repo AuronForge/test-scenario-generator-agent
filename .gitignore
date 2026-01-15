@@ -6,7 +6,5 @@ node_modules/
 dist/
 coverage/
 .env*.local
-results/*.json
-!results/.gitkeep
 database/*.json
 !database/.gitkeep
