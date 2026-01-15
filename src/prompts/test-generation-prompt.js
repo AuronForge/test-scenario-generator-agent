@@ -14,19 +14,16 @@ ${feature.technicalDetails.components ? `- Components: ${feature.technicalDetail
 ${feature.technicalDetails.dependencies ? `- Dependencies: ${feature.technicalDetails.dependencies.join(', ')}` : ''}
 ` : ''}
 
-${feature.userFlows ? `
-**User Flows:**
-${feature.userFlows.map(flow => `Step ${flow.step}: ${flow.action} -> ${flow.expectedResult}`).join('\n')}
-` : ''}
-
 ${feature.businessRules ? `
 **Business Rules:**
 ${feature.businessRules.map((rule, i) => `${i + 1}. ${rule}`).join('\n')}
 ` : ''}
 
 **Your Task:**
-1. **First, analyze the feature and generate acceptance criteria** based on the description, technical details, user flows, and business rules
-2. Create comprehensive test scenarios covering ALL derived acceptance criteria
+1. **Analyze the feature and generate:**
+   - User flows (step-by-step user interactions)
+   - Acceptance criteria based on the description, technical details, and business rules
+2. Create comprehensive test scenarios covering ALL derived acceptance criteria and user flows
 3. Include positive, negative, and edge case scenarios
 4. Ensure scenarios are clear, actionable, and detailed
 5. Prioritize scenarios based on risk and impact

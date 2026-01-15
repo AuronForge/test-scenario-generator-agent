@@ -7,23 +7,6 @@
     "components": ["LoginForm", "AuthService", "SessionManager"],
     "dependencies": ["bcrypt", "jsonwebtoken", "express-session"]
   },
-  "userFlows": [
-    {
-      "step": 1,
-      "action": "User enters email and password",
-      "expectedResult": "Form validates input fields"
-    },
-    {
-      "step": 2,
-      "action": "User clicks login button",
-      "expectedResult": "System authenticates credentials"
-    },
-    {
-      "step": 3,
-      "action": "System validates credentials",
-      "expectedResult": "User is redirected to dashboard"
-    }
-  ],
   "businessRules": [
     "Password must be at least 8 characters",
     "Account locks after 5 failed login attempts",

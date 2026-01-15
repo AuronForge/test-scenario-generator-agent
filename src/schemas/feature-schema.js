@@ -10,11 +10,6 @@ export const FeatureSchema = z.object({
     components: z.array(z.string()).optional(),
     dependencies: z.array(z.string()).optional()
   }).optional(),
-  userFlows: z.array(z.object({
-    step: z.number(),
-    action: z.string(),
-    expectedResult: z.string()
-  })).optional(),
   businessRules: z.array(z.string()).optional(),
   metadata: z.record(z.any()).optional()
 });
