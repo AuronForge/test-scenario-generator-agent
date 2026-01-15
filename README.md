@@ -182,8 +182,25 @@ ci: add commitlint validation
 
 ### Git Hooks (Husky)
 
-**Pre-commit**: Roda lint e testes antes do commit
+**Pre-commit**: Roda lint-staged (lint + format) nos arquivos staged e testes completos
 **Commit-msg**: Valida formato da mensagem de commit
+
+### Lint-staged
+
+O projeto utiliza **lint-staged** para rodar validações apenas nos arquivos que estão em staged:
+
+```json
+{
+  "*.js": ["eslint --fix", "prettier --write"],
+  "*.{json,md}": ["prettier --write"]
+}
+```
+
+**Benefícios:**
+
+- ⚡ Mais rápido (valida apenas arquivos modificados)
+- ✅ Auto-fix de problemas de lint e formatação
+- 🎯 Foco nos arquivos que serão commitados
 
 ## Versionamento e Changelog
 
