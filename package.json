@@ -5,14 +5,21 @@
   "main": "api/generate-tests.js",
   "type": "module",
   "scripts": {
+    "commit": "cz",
     "dev": "vercel dev",
     "format": "prettier --write \"**/*.{js,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,json,md}\"",
     "lint": "eslint src/ api/ tests/",
     "lint:fix": "eslint src/ api/ tests/ --fix",
+    "prepare": "husky",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.27.0",
@@ -21,10 +28,15 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.3.1",
+    "@commitlint/config-conventional": "^20.3.1",
     "@jest/globals": "^29.7.0",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
+    "husky": "^9.1.7",
     "jest": "^29.7.0",
     "prettier": "^3.8.0"
   }

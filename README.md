@@ -135,6 +135,56 @@ npm run format:check # Verifica se código está formatado
 - ✅ `curly`: Sempre usar chaves em blocos
 - ⚠️ `no-console`: Permitido (logs são úteis em serverless)
 
+### Conventional Commits
+
+O projeto utiliza **Commitlint** e **Commitizen** para padronizar mensagens de commit:
+
+#### Criando Commits
+
+```bash
+npm run commit  # Interface interativa para criar commits
+# ou
+git commit -m "feat: add new feature"
+```
+
+#### Formato de Commits
+
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+**Types permitidos:**
+
+- `feat`: Nova funcionalidade
+- `fix`: Correção de bug
+- `docs`: Documentação
+- `style`: Formatação (não afeta código)
+- `refactor`: Refatoração
+- `perf`: Melhoria de performance
+- `test`: Testes
+- `build`: Sistema de build
+- `ci`: CI/CD
+- `chore`: Manutenção
+
+**Exemplos:**
+
+```bash
+feat: add GitHub Models support
+fix: resolve coverage calculation bug
+docs: update README with CI/CD instructions
+test: increase coverage to 95%
+ci: add commitlint validation
+```
+
+### Git Hooks (Husky)
+
+**Pre-commit**: Roda lint e testes antes do commit
+**Commit-msg**: Valida formato da mensagem de commit
+
 ## Usage
 
 ### Local Development
