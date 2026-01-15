@@ -10,6 +10,10 @@
     {
       "source": "/api/generate-scenarios",
       "destination": "/api/generate-scenarios.js"
+    },
+    {
+      "source": "/api/generated-scenarios",
+      "destination": "/api/generated-scenarios.js"
     }
   ],
   "env": {

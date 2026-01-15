@@ -303,6 +303,95 @@ Generate test scenarios from a feature specification.
 
 ```json
 {
+  "name": "User Login Authentication",
+  "description": "Allow users to login using email and password",
+  "type": "Feature"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "data": {
+    "scenarios": [...],
+    "coverage": {...}
+  },
+  "metadata": {...},
+  "savedTo": "feature-user-login-authentication.json"
+}
+```
+
+### GET `/api/generated-scenarios`
+
+List all generated test scenarios.
+
+**Query Parameters:**
+
+- `id` (optional): Get specific scenario by ID
+
+**Response (List All):**
+
+```json
+{
+  "success": true,
+  "total": 5,
+  "data": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "createdAt": "2026-01-15T10:30:00.000Z",
+      "feature": {
+        "name": "User Login Authentication",
+        "description": "...",
+        "type": "Feature"
+      },
+      "scenarios": {...},
+      "provider": "github"
+    }
+  ]
+}
+```
+
+**Response (Get by ID):**
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "createdAt": "2026-01-15T10:30:00.000Z",
+    "feature": {...},
+    "scenarios": {...},
+    "provider": "github"
+  }
+}
+```
+
+**Examples:**
+
+```bash
+# List all scenarios
+curl http://localhost:3000/api/generated-scenarios
+
+# Get specific scenario
+curl http://localhost:3000/api/generated-scenarios?id=550e8400-e29b-41d4-a716-446655440000
+```
+
+### POST `/api/generate-scenarios` (Legacy Headers)
+
+Generate test scenarios from a feature specification.
+
+**Headers:**
+
+- `Content-Type: application/json`
+- `x-ai-provider: openai|github|anthropic` (optional, default: openai)
+
+**Request Body:**
+
+```json
+{
   "name": "Feature Name",
   "description": "Detailed feature description (required, min 10 chars)",
   "type": "user-story|epic|task|bug-fix",

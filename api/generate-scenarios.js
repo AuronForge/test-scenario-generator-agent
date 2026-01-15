@@ -1,4 +1,5 @@
 import { QAAgent } from '../src/agents/qa-agent.js';
+import { saveScenario } from '../src/database/scenario-db.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -25,6 +26,15 @@ export default async function handler(req, res) {
     const result = await qaAgent.generateTestScenarios(featureData);
 
     if (result.success) {
+      // Salvar no banco de dados
+      let savedEntry = null;
+      try {
+        savedEntry = saveScenario(featureData, result.data, aiProvider);
+        console.log(`✅ Cenário salvo no banco de dados com ID: ${savedEntry.id}`);
+      } catch (dbError) {
+        console.error('⚠️ Erro ao salvar no banco de dados:', dbError.message);
+      }
+
       // Salvar resultado em arquivo
       try {
         const resultsDir = path.join(process.cwd(), 'results');
@@ -47,8 +57,11 @@ export default async function handler(req, res) {
         // Salvar arquivo
         fs.writeFileSync(filePath, JSON.stringify(result, null, 2), 'utf8');
 
-        // Adicionar caminho do arquivo na resposta
+        // Adicionar caminho do arquivo e ID na resposta
         result.savedTo = fileName;
+        if (savedEntry) {
+          result.id = savedEntry.id;
+        }
 
         console.log(`✅ Resultado salvo em: ${filePath}`);
       } catch (saveError) {
