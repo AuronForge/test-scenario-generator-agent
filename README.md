@@ -86,7 +86,7 @@ npm run dev
 ### API Request
 
 ```bash
-curl -X POST http://localhost:3000/api/generate-tests \
+curl -X POST http://localhost:3000/api/generate-scenarios \
   -H "Content-Type: application/json" \
   -d @examples/feature-example.json
 ```
@@ -102,13 +102,13 @@ const result = await agent.generateTestScenarios(featureData);
 
 ## API Documentation
 
-### POST `/api/generate-tests`
+### POST `/api/generate-scenarios`
 
 Generate test scenarios from a feature specification.
 
 **Headers:**
 - `Content-Type: application/json`
-- `x-ai-provider: openai|anthropic` (optional, default: openai)
+- `x-ai-provider: openai|github|anthropic` (optional, default: openai)
 
 **Request Body:** See `examples/feature-example.json`
 
