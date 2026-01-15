@@ -8,7 +8,8 @@ This is the first agent in a multi-agent system designed to automate software de
 
 ## Features
 
-- ✅ Automated test scenario generation
+- ✅ **Smart AI-powered analysis** - Agent automatically generates user flows and acceptance criteria
+- ✅ Automated test scenario generation from minimal input
 - ✅ Support for multiple test types (functional, integration, e2e, edge cases)
 - ✅ Schema validation for inputs and outputs
 - ✅ Multiple AI provider support (OpenAI, GitHub Models, Anthropic)
@@ -157,7 +158,37 @@ Generate test scenarios from a feature specification.
 - `Content-Type: application/json`
 - `x-ai-provider: openai|github|anthropic` (optional, default: openai)
 
-**Request Body:** See `examples/feature-example.json`
+**Request Body:**
+```json
+{
+  "name": "Feature Name",
+  "description": "Detailed feature description (required, min 10 chars)",
+  "type": "user-story|epic|task|bug-fix",
+  "technicalDetails": {
+    "endpoints": ["/api/endpoint"],
+    "components": ["Component1"],
+    "dependencies": ["package1"]
+  },
+  "businessRules": [
+    "Rule 1",
+    "Rule 2"
+  ]
+}
+```
+
+**Note:** The agent automatically generates:
+- ✨ **User flows** - Step-by-step user interactions
+- ✨ **Acceptance criteria** - Based on description, technical details, and business rules
+- ✨ **Test scenarios** - Comprehensive coverage including positive, negative, and edge cases
+
+**Minimal Example:**
+```json
+{
+  "name": "User Login",
+  "description": "Implement secure user login with email and password",
+  "type": "user-story"
+}
+```
 
 **Response:**
 ```json
