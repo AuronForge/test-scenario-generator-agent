@@ -11,10 +11,12 @@ This is the first agent in a multi-agent system designed to automate software de
 - ✅ Automated test scenario generation
 - ✅ Support for multiple test types (functional, integration, e2e, edge cases)
 - ✅ Schema validation for inputs and outputs
-- ✅ Multiple AI provider support (OpenAI, Anthropic)
+- ✅ Multiple AI provider support (OpenAI, GitHub Models, Anthropic)
+- ✅ **GitHub Models integration (Free!)** - Use GPT-4o via GitHub API
 - ✅ Coverage analysis
 - ✅ Hosted on Vercel for easy deployment
 - ✅ RESTful API
+- ✅ Auto-save results to JSON files
 - ✅ **Comprehensive unit tests with >70% coverage**
 
 ## Installation
@@ -28,13 +30,37 @@ npm install
 Create a `.env` file:
 
 ```env
+# OpenAI Configuration
 OPENAI_API_KEY=your_openai_key
-OPENAI_MODEL=gpt-4-turbo-preview
+OPENAI_MODEL=gpt-4o
 
-# Or use Anthropic
+# GitHub Models Configuration (Free! Recommended)
+GITHUB_TOKEN=your_github_personal_access_token
+GITHUB_MODEL=gpt-4o
+
+# Anthropic Configuration
 ANTHROPIC_API_KEY=your_anthropic_key
 ANTHROPIC_MODEL=claude-3-5-sonnet-20241022
+
+# Environment
+NODE_ENV=development
 ```
+
+### GitHub Models Setup (Recommended)
+
+1. Generate a GitHub Personal Access Token:
+   - Go to https://github.com/settings/tokens
+   - Click "Generate new token (classic)"
+   - Select scope: `read:packages`
+   - Copy the generated token
+
+2. Add to `.env`:
+   ```env
+   GITHUB_TOKEN=ghp_your_token_here
+   GITHUB_MODEL=gpt-4o
+   ```
+
+3. **Benefits**: Free access to GPT-4o with generous rate limits!
 
 ## Testing
 
@@ -85,9 +111,19 @@ npm run dev
 
 ### API Request
 
+**Using GitHub Models (Recommended):**
 ```bash
 curl -X POST http://localhost:3000/api/generate-scenarios \
   -H "Content-Type: application/json" \
+  -H "x-ai-provider: github" \
+  -d @examples/feature-example.json
+```
+
+**Using OpenAI:**
+```bash
+curl -X POST http://localhost:3000/api/generate-scenarios \
+  -H "Content-Type: application/json" \
+  -H "x-ai-provider: openai" \
   -d @examples/feature-example.json
 ```
 
@@ -96,8 +132,19 @@ curl -X POST http://localhost:3000/api/generate-scenarios \
 ```javascript
 import { QAAgent } from './src/agents/qa-agent.js';
 
-const agent = new QAAgent('openai');
+// Using GitHub Models (Free!)
+const agent = new QAAgent('github');
+
+// Or use OpenAI
+// const agent = new QAAgent('openai');
+
+// Or use Anthropic
+// const agent = new QAAgent('anthropic');
+
 const result = await agent.generateTestScenarios(featureData);
+console.log(result.data.scenarios);
+
+// Results are automatically saved to results/feature-{name}.json
 ```
 
 ## API Documentation
@@ -120,12 +167,19 @@ Generate test scenarios from a feature specification.
     "featureId": "feat-123",
     "featureName": "User Login Authentication",
     "scenarios": [...],
-    "coverage": {...},
+    "coverage": {
+      "acceptanceCriteria": 100,
+      "edgeCases": 5,
+      "negativeScenarios": 3
+    },
     "recommendations": [...]
   },
-  "metadata": {...}
+  "metadata": {...},
+  "savedTo": "feature-user-login-authentication.json"
 }
 ```
+
+**Note**: Results are automatically saved to the `results/` directory.
 
 ## Schema
 
