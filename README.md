@@ -16,9 +16,24 @@ This is the first agent in a multi-agent system designed to automate software de
 - ✅ **GitHub Models integration (Free!)** - Use GPT-4o via GitHub API
 - ✅ Coverage analysis
 - ✅ Hosted on Vercel for easy deployment
-- ✅ RESTful API
+- ✅ RESTful API with **Swagger documentation**
 - ✅ Auto-save results to JSON files
 - ✅ **Comprehensive unit tests with >70% coverage**
+
+## 📚 API Documentation
+
+Access the interactive Swagger documentation:
+
+- **Local**: http://localhost:3000/docs
+- **Production**: https://your-app.vercel.app/docs
+
+The Swagger UI provides:
+
+- Complete API reference
+- Interactive request/response testing
+- Request/response examples
+- Schema definitions
+- Try-it-out functionality
 
 ## Installation
 
@@ -248,7 +263,39 @@ git push --follow-tags origin main
 npm run dev
 ```
 
-### API Request
+The server will start at `http://localhost:3000`
+
+**Access the API Documentation:** `http://localhost:3000/docs`
+
+### API Endpoints
+
+#### 1. Generate Test Scenarios
+
+**Endpoint:** `POST /api/generate-scenarios`
+
+**Headers:**
+
+- `Content-Type: application/json`
+- `x-ai-provider: openai|github|anthropic` (optional, default: openai)
+
+**Request Body:**
+
+```json
+{
+  "name": "User Login",
+  "description": "Funcionalidade de autenticação de usuários no sistema"
+}
+```
+
+#### 2. List Generated Scenarios
+
+**Endpoint:** `GET /api/generated-scenarios`
+
+**Query Parameters:**
+
+- `id` (optional): ID do cenário específico
+
+### API Request Examples
 
 **Using GitHub Models (Recommended):**
 
@@ -266,6 +313,18 @@ curl -X POST http://localhost:3000/api/generate-scenarios \
   -H "Content-Type: application/json" \
   -H "x-ai-provider: openai" \
   -d @examples/feature-example.json
+```
+
+**List all scenarios:**
+
+```bash
+curl http://localhost:3000/api/generated-scenarios
+```
+
+**Get specific scenario:**
+
+```bash
+curl "http://localhost:3000/api/generated-scenarios?id=uuid-123"
 ```
 
 ### Programmatic Usage
