@@ -6,10 +6,13 @@ You are an expert QA engineer. Generate comprehensive test scenarios for the fol
 - Name: ${feature.name}
 - Type: ${feature.type}
 - Description: ${feature.description}
-- Priority: ${feature.priority}
 
-**Acceptance Criteria:**
-${feature.acceptanceCriteria.map((ac, i) => `${i + 1}. ${ac}`).join('\n')}
+${feature.technicalDetails ? `
+**Technical Details:**
+${feature.technicalDetails.endpoints ? `- Endpoints: ${feature.technicalDetails.endpoints.join(', ')}` : ''}
+${feature.technicalDetails.components ? `- Components: ${feature.technicalDetails.components.join(', ')}` : ''}
+${feature.technicalDetails.dependencies ? `- Dependencies: ${feature.technicalDetails.dependencies.join(', ')}` : ''}
+` : ''}
 
 ${feature.userFlows ? `
 **User Flows:**
@@ -21,12 +24,13 @@ ${feature.businessRules ? `
 ${feature.businessRules.map((rule, i) => `${i + 1}. ${rule}`).join('\n')}
 ` : ''}
 
-**Requirements:**
-1. Create test scenarios covering ALL acceptance criteria
-2. Include positive, negative, and edge case scenarios
-3. Ensure scenarios are clear, actionable, and detailed
-4. Prioritize scenarios based on risk and impact
-5. Suggest automation potential for each scenario
+**Your Task:**
+1. **First, analyze the feature and generate acceptance criteria** based on the description, technical details, user flows, and business rules
+2. Create comprehensive test scenarios covering ALL derived acceptance criteria
+3. Include positive, negative, and edge case scenarios
+4. Ensure scenarios are clear, actionable, and detailed
+5. Prioritize scenarios based on risk and impact
+6. Suggest automation potential for each scenario
 
 **Output Format (JSON):**
 {

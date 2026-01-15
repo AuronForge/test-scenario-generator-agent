@@ -2,13 +2,6 @@
   "name": "User Login Authentication",
   "description": "Implement secure user login functionality with email and password",
   "type": "user-story",
-  "acceptanceCriteria": [
-    "User can login with valid email and password",
-    "System displays error message for invalid credentials",
-    "User is redirected to dashboard after successful login",
-    "Login attempts are rate-limited after 3 failed attempts",
-    "User session is created and stored securely"
-  ],
   "technicalDetails": {
     "endpoints": ["/api/auth/login", "/api/auth/session"],
     "components": ["LoginForm", "AuthService", "SessionManager"],

@@ -5,7 +5,6 @@ export const FeatureSchema = z.object({
   name: z.string().min(1, "Feature name is required"),
   description: z.string().min(10, "Description must be detailed"),
   type: z.enum(['user-story', 'epic', 'task', 'bug-fix']),
-  acceptanceCriteria: z.array(z.string()).min(1, "At least one acceptance criteria required"),
   technicalDetails: z.object({
     endpoints: z.array(z.string()).optional(),
     components: z.array(z.string()).optional(),
