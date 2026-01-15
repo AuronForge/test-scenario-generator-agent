@@ -2,7 +2,6 @@
   "name": "User Login Authentication",
   "description": "Implement secure user login functionality with email and password",
   "type": "user-story",
-  "priority": "high",
   "acceptanceCriteria": [
     "User can login with valid email and password",
     "System displays error message for invalid credentials",

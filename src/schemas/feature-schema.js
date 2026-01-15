@@ -17,7 +17,6 @@ export const FeatureSchema = z.object({
     expectedResult: z.string()
   })).optional(),
   businessRules: z.array(z.string()).optional(),
-  priority: z.enum(['low', 'medium', 'high', 'critical']).default('medium'),
   metadata: z.record(z.any()).optional()
 });
 
