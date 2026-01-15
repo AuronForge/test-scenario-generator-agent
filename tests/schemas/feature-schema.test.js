@@ -8,12 +8,7 @@ describe('FeatureSchema', () => {
         id: 'feat-001',
         name: 'User Authentication',
         description: 'Implement user login with email and password',
-        type:  'user-story',
-        priority: 'high',
-        acceptanceCriteria: [
-          'User can login with valid credentials',
-          'Error shown for invalid credentials'
-        ]
+        type: 'user-story'
       };
 
       const result = validateFeature(validFeature);
@@ -24,13 +19,12 @@ describe('FeatureSchema', () => {
       const minimalFeature = {
         name: 'Simple Feature',
         description: 'A simple feature description',
-        type: 'task',
-        acceptanceCriteria: ['Criterion 1']
+        type: 'task'
       };
 
       const result = validateFeature(minimalFeature);
-      expect(result. name).toBe('Simple Feature');
-      expect(result.priority).toBe('medium');
+      expect(result.name).toBe('Simple Feature');
+      expect(result.type).toBe('task');
     });
   });
 
@@ -38,19 +32,17 @@ describe('FeatureSchema', () => {
     it('should reject feature without name', () => {
       const invalidFeature = {
         description: 'Missing name field',
-        type: 'task',
-        acceptanceCriteria: ['Criterion 1']
+        type: 'task'
       };
 
       expect(() => validateFeature(invalidFeature)).toThrow();
     });
 
-    it('should reject feature with empty acceptance criteria', () => {
+    it('should reject feature with short description', () => {
       const invalidFeature = {
         name: 'Test Feature',
-        description: 'Test description for validation',
-        type: 'task',
-        acceptanceCriteria: []
+        description: 'Short',
+        type: 'task'
       };
 
       expect(() => validateFeature(invalidFeature)).toThrow();
