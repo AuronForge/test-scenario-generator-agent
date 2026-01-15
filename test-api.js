@@ -10,9 +10,9 @@ console.log('📋 Feature:', JSON.parse(data).name);
 fetch(url, {
   method: 'POST',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  body: data
+  body: data,
 })
   .then(async res => {
     console.log('📊 Status:', res.status);

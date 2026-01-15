@@ -3,7 +3,7 @@
 ## GitHub Secrets Necessários
 
 1. **VERCEL_TOKEN** - Token da Vercel API
-   - Obter em:  https://vercel.com/account/tokens
+   - Obter em: https://vercel.com/account/tokens
 
 2. **VERCEL_ORG_ID** - ID da sua organização/usuário Vercel
    - Executar: `vercel whoami` ou ver em `.vercel/project.json`
@@ -14,5 +14,7 @@
 ## Passos para Configurar
 
 ### 1. Instalar Vercel CLI
+
 ```bash
 npm install -g vercel
+```

@@ -14,10 +14,10 @@ describe('TestScenarioSchema', () => {
         {
           stepNumber: 1,
           action: 'Navigate to login page',
-          expectedResult: 'Login form is displayed'
-        }
+          expectedResult: 'Login form is displayed',
+        },
       ],
-      expectedOutcome: 'User is redirected to dashboard'
+      expectedOutcome: 'User is redirected to dashboard',
     };
 
     const result = TestScenarioSchema.parse(validScenario);
@@ -35,11 +35,11 @@ describe('TestSuiteSchema', () => {
       coverage: {
         acceptanceCriteria: 100,
         edgeCases: 5,
-        negativeScenarios: 3
-      }
+        negativeScenarios: 3,
+      },
     };
 
-    const result = TestSuiteSchema. parse(validSuite);
-    expect(result. featureId).toBe('feat-001');
+    const result = TestSuiteSchema.parse(validSuite);
+    expect(result.featureId).toBe('feat-001');
   });
 });

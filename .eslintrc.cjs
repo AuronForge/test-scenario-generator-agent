@@ -5,16 +5,25 @@ module.exports = {
     jest: true
   },
   extends: [
-    'eslint: recommended'
+    'eslint:recommended',
+    'plugin:prettier/recommended'
   ],
+  plugins: ['prettier'],
   parserOptions: {
-    ecmaVersion:  'latest',
+    ecmaVersion: 'latest',
     sourceType: 'module'
   },
   rules: {
-    'no-unused-vars': ['warn', { argsIgnorePattern:  '^_' }],
+    'prettier/prettier': 'error',
+    'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     'no-console': 'off',
     'prefer-const': 'error',
-    'no-var': 'error'
+    'no-var': 'error',
+    'eqeqeq': ['error', 'always'],
+    'curly': ['error', 'all'],
+    'no-throw-literal': 'error',
+    'prefer-template': 'warn',
+    'no-nested-ternary': 'warn',
+    'no-unneeded-ternary': 'error'
   }
 };

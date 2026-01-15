@@ -8,7 +8,7 @@ describe('FeatureSchema', () => {
         id: 'feat-001',
         name: 'User Authentication',
         description: 'Implement user login with email and password',
-        type: 'user-story'
+        type: 'user-story',
       };
 
       const result = validateFeature(validFeature);
@@ -19,7 +19,7 @@ describe('FeatureSchema', () => {
       const minimalFeature = {
         name: 'Simple Feature',
         description: 'A simple feature description',
-        type: 'task'
+        type: 'task',
       };
 
       const result = validateFeature(minimalFeature);
@@ -32,7 +32,7 @@ describe('FeatureSchema', () => {
     it('should reject feature without name', () => {
       const invalidFeature = {
         description: 'Missing name field',
-        type: 'task'
+        type: 'task',
       };
 
       expect(() => validateFeature(invalidFeature)).toThrow();
@@ -42,7 +42,7 @@ describe('FeatureSchema', () => {
       const invalidFeature = {
         name: 'Test Feature',
         description: 'Short',
-        type: 'task'
+        type: 'task',
       };
 
       expect(() => validateFeature(invalidFeature)).toThrow();

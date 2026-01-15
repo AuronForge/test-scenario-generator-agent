@@ -7,17 +7,25 @@ You are an expert QA engineer. Generate comprehensive test scenarios for the fol
 - Type: ${feature.type}
 - Description: ${feature.description}
 
-${feature.technicalDetails ? `
+${
+  feature.technicalDetails
+    ? `
 **Technical Details:**
 ${feature.technicalDetails.endpoints ? `- Endpoints: ${feature.technicalDetails.endpoints.join(', ')}` : ''}
 ${feature.technicalDetails.components ? `- Components: ${feature.technicalDetails.components.join(', ')}` : ''}
 ${feature.technicalDetails.dependencies ? `- Dependencies: ${feature.technicalDetails.dependencies.join(', ')}` : ''}
-` : ''}
+`
+    : ''
+}
 
-${feature.businessRules ? `
+${
+  feature.businessRules
+    ? `
 **Business Rules:**
 ${feature.businessRules.map((rule, i) => `${i + 1}. ${rule}`).join('\n')}
-` : ''}
+`
+    : ''
+}
 
 **Your Task:**
 1. **Analyze the feature and generate:**

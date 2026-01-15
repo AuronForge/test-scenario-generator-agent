@@ -12,9 +12,9 @@ fetch(url, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    'x-ai-provider': 'github'
+    'x-ai-provider': 'github',
   },
-  body: data
+  body: data,
 })
   .then(async res => {
     console.log('📊 Status:', res.status);

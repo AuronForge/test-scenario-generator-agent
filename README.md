@@ -56,6 +56,7 @@ NODE_ENV=development
    - Copy the generated token
 
 2. Add to `.env`:
+
    ```env
    GITHUB_TOKEN=ghp_your_token_here
    GITHUB_MODEL=gpt-4o
@@ -66,21 +67,25 @@ NODE_ENV=development
 ## Testing
 
 ### Run all tests
+
 ```bash
 npm test
 ```
 
 ### Run tests in watch mode
+
 ```bash
 npm run test:watch
 ```
 
 ### Generate coverage report
+
 ```bash
 npm run test:coverage
 ```
 
 ### Test Structure
+
 ```
 tests/
 ├── schemas/
@@ -97,10 +102,38 @@ tests/
 ```
 
 ### Coverage Thresholds
+
 - Branches: 70%
 - Functions: 70%
 - Lines: 70%
 - Statements: 70%
+
+## Code Quality
+
+### Linters & Formatters
+
+O projeto utiliza:
+
+- **ESLint**: Análise estática de código JavaScript
+- **Prettier**: Formatação automática de código
+- **EditorConfig**: Padronização de configurações do editor
+
+### Scripts Disponíveis
+
+```bash
+npm run lint         # Verifica problemas de lint
+npm run lint:fix     # Corrige problemas de lint automaticamente
+npm run format       # Formata código com Prettier
+npm run format:check # Verifica se código está formatado
+```
+
+### Regras Principais
+
+- ✅ `eqeqeq`: Sempre usar `===` ao invés de `==`
+- ✅ `prefer-const`: Preferir const para variáveis não reatribuídas
+- ✅ `no-var`: Proibir uso de `var`
+- ✅ `curly`: Sempre usar chaves em blocos
+- ⚠️ `no-console`: Permitido (logs são úteis em serverless)
 
 ## Usage
 
@@ -113,6 +146,7 @@ npm run dev
 ### API Request
 
 **Using GitHub Models (Recommended):**
+
 ```bash
 curl -X POST http://localhost:3000/api/generate-scenarios \
   -H "Content-Type: application/json" \
@@ -121,6 +155,7 @@ curl -X POST http://localhost:3000/api/generate-scenarios \
 ```
 
 **Using OpenAI:**
+
 ```bash
 curl -X POST http://localhost:3000/api/generate-scenarios \
   -H "Content-Type: application/json" \
@@ -155,10 +190,12 @@ console.log(result.data.scenarios);
 Generate test scenarios from a feature specification.
 
 **Headers:**
+
 - `Content-Type: application/json`
 - `x-ai-provider: openai|github|anthropic` (optional, default: openai)
 
 **Request Body:**
+
 ```json
 {
   "name": "Feature Name",
@@ -169,19 +206,18 @@ Generate test scenarios from a feature specification.
     "components": ["Component1"],
     "dependencies": ["package1"]
   },
-  "businessRules": [
-    "Rule 1",
-    "Rule 2"
-  ]
+  "businessRules": ["Rule 1", "Rule 2"]
 }
 ```
 
 **Note:** The agent automatically generates:
+
 - ✨ **User flows** - Step-by-step user interactions
 - ✨ **Acceptance criteria** - Based on description, technical details, and business rules
 - ✨ **Test scenarios** - Comprehensive coverage including positive, negative, and edge cases
 
 **Minimal Example:**
+
 ```json
 {
   "name": "User Login",
@@ -191,6 +227,7 @@ Generate test scenarios from a feature specification.
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -215,6 +252,7 @@ Generate test scenarios from a feature specification.
 ## Schema
 
 Input and output schemas are validated using Zod. See:
+
 - `src/schemas/feature-schema.js` - Feature input schema
 - `src/schemas/test-scenario-schema.js` - Test output schema
 

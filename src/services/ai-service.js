@@ -4,21 +4,21 @@ import Anthropic from '@anthropic-ai/sdk';
 export class AIService {
   constructor(provider = 'openai') {
     this.provider = provider;
-    
+
     if (provider === 'openai') {
       this.client = new OpenAI({
-        apiKey: process.env.OPENAI_API_KEY
+        apiKey: process.env.OPENAI_API_KEY,
       });
       this.model = process.env.OPENAI_MODEL || 'gpt-4-turbo-preview';
     } else if (provider === 'github') {
       this.client = new OpenAI({
         apiKey: process.env.GITHUB_TOKEN,
-        baseURL: 'https://models.inference.ai.azure.com'
+        baseURL: 'https://models.inference.ai.azure.com',
       });
       this.model = process.env.GITHUB_MODEL || 'gpt-4o';
     } else if (provider === 'anthropic') {
       this.client = new Anthropic({
-        apiKey: process.env.ANTHROPIC_API_KEY
+        apiKey: process.env.ANTHROPIC_API_KEY,
       });
       this.model = process.env.ANTHROPIC_MODEL || 'claude-3-5-sonnet-20241022';
     }
@@ -42,15 +42,16 @@ export class AIService {
       messages: [
         {
           role: 'system',
-          content: 'You are an expert QA engineer specialized in creating comprehensive test scenarios.'
+          content:
+            'You are an expert QA engineer specialized in creating comprehensive test scenarios.',
         },
         {
           role: 'user',
-          content: prompt
-        }
+          content: prompt,
+        },
       ],
       temperature: options.temperature || 0.7,
-      response_format: { type: "json_object" }
+      response_format: { type: 'json_object' },
     });
 
     return response.choices[0].message.content;
@@ -63,10 +64,11 @@ export class AIService {
       messages: [
         {
           role: 'user',
-          content: prompt
-        }
+          content: prompt,
+        },
       ],
-      system: 'You are an expert QA engineer specialized in creating comprehensive test scenarios. Always respond with valid JSON.'
+      system:
+        'You are an expert QA engineer specialized in creating comprehensive test scenarios. Always respond with valid JSON.',
     });
 
     return response.content[0].text;

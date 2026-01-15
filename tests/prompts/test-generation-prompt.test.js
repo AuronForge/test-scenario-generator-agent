@@ -6,7 +6,7 @@ describe('generateTestPrompt', () => {
     const feature = {
       name: 'User Login',
       type: 'user-story',
-      description: 'Implement secure login'
+      description: 'Implement secure login',
     };
 
     const prompt = generateTestPrompt(feature);
@@ -20,7 +20,7 @@ describe('generateTestPrompt', () => {
     const feature = {
       name: 'Test',
       type: 'task',
-      description: 'Test description'
+      description: 'Test description',
     };
 
     const prompt = generateTestPrompt(feature);
@@ -33,7 +33,7 @@ describe('generateTestPrompt', () => {
     const feature = {
       name: 'Test',
       type: 'task',
-      description: 'Test description'
+      description: 'Test description',
     };
 
     const prompt = generateTestPrompt(feature);
@@ -48,7 +48,7 @@ describe('generateTestPrompt', () => {
       name: 'Test',
       type: 'task',
       description: 'Test description',
-      businessRules: ['Rule 1', 'Rule 2']
+      businessRules: ['Rule 1', 'Rule 2'],
     };
 
     const prompt = generateTestPrompt(feature);
@@ -61,7 +61,7 @@ describe('generateTestPrompt', () => {
     const feature = {
       name: 'Test',
       type: 'task',
-      description: 'Test description'
+      description: 'Test description',
     };
 
     const prompt = generateTestPrompt(feature);
@@ -75,8 +75,8 @@ describe('generateTestPrompt', () => {
       type: 'task',
       description: 'Test description',
       technicalDetails: {
-        endpoints: ['/api/test', '/api/users']
-      }
+        endpoints: ['/api/test', '/api/users'],
+      },
     };
 
     const prompt = generateTestPrompt(feature);
@@ -93,8 +93,8 @@ describe('generateTestPrompt', () => {
       type: 'task',
       description: 'Test description',
       technicalDetails: {
-        components: ['Component1', 'Component2']
-      }
+        components: ['Component1', 'Component2'],
+      },
     };
 
     const prompt = generateTestPrompt(feature);
@@ -110,8 +110,8 @@ describe('generateTestPrompt', () => {
       type: 'task',
       description: 'Test description',
       technicalDetails: {
-        dependencies: ['package1', 'package2']
-      }
+        dependencies: ['package1', 'package2'],
+      },
     };
 
     const prompt = generateTestPrompt(feature);
@@ -129,8 +129,8 @@ describe('generateTestPrompt', () => {
       technicalDetails: {
         endpoints: ['/api/test'],
         components: ['Component1'],
-        dependencies: ['package1']
-      }
+        dependencies: ['package1'],
+      },
     };
 
     const prompt = generateTestPrompt(feature);
@@ -145,7 +145,7 @@ describe('generateTestPrompt', () => {
     const feature = {
       name: 'Test',
       type: 'task',
-      description: 'Test description'
+      description: 'Test description',
     };
 
     const prompt = generateTestPrompt(feature);
@@ -158,7 +158,7 @@ describe('generateTestPrompt', () => {
       name: 'Test',
       type: 'task',
       description: 'Test description',
-      technicalDetails: {}
+      technicalDetails: {},
     };
 
     const prompt = generateTestPrompt(feature);
@@ -166,4 +166,3 @@ describe('generateTestPrompt', () => {
     expect(prompt).toContain('Technical Details:');
   });
 });
-

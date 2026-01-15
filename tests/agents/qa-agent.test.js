@@ -27,7 +27,7 @@ describe('QAAgent', () => {
         name: 'Test Feature',
         description: 'Test description',
         type: 'user-story',
-        acceptanceCriteria: ['Criterion 1']
+        acceptanceCriteria: ['Criterion 1'],
       };
 
       const aiResponse = JSON.stringify({
@@ -43,17 +43,17 @@ describe('QAAgent', () => {
               {
                 stepNumber: 1,
                 action: 'Do something',
-                expectedResult: 'Result'
-              }
+                expectedResult: 'Result',
+              },
             ],
-            expectedOutcome: 'Success'
-          }
+            expectedOutcome: 'Success',
+          },
         ],
         coverage: {
           acceptanceCriteria: 100,
           edgeCases: 5,
-          negativeScenarios: 3
-        }
+          negativeScenarios: 3,
+        },
       });
 
       const result = agent.parseAIResponse(aiResponse, feature);
@@ -67,11 +67,11 @@ describe('QAAgent', () => {
         name: 'Test Feature',
         description: 'Test description',
         type: 'task',
-        acceptanceCriteria: ['Criterion 1']
+        acceptanceCriteria: ['Criterion 1'],
       };
 
       const aiResponse = JSON.stringify({
-        scenarios: []
+        scenarios: [],
       });
 
       const result = agent.parseAIResponse(aiResponse, feature);
@@ -86,11 +86,12 @@ describe('QAAgent', () => {
         name: 'Test Feature',
         description: 'Test description',
         type: 'task',
-        acceptanceCriteria: ['Criterion 1']
+        acceptanceCriteria: ['Criterion 1'],
       };
 
-      expect(() => agent.parseAIResponse('invalid json', feature))
-        .toThrow('Failed to parse AI response');
+      expect(() => agent.parseAIResponse('invalid json', feature)).toThrow(
+        'Failed to parse AI response'
+      );
     });
 
     it('should generate feature ID when not provided', () => {
@@ -99,7 +100,7 @@ describe('QAAgent', () => {
         name: 'Test Feature',
         description: 'Test description',
         type: 'task',
-        acceptanceCriteria: ['Criterion 1']
+        acceptanceCriteria: ['Criterion 1'],
       };
 
       const aiResponse = JSON.stringify({
@@ -107,8 +108,8 @@ describe('QAAgent', () => {
         coverage: {
           acceptanceCriteria: 0,
           edgeCases: 0,
-          negativeScenarios: 0
-        }
+          negativeScenarios: 0,
+        },
       });
 
       const result = agent.parseAIResponse(aiResponse, feature);
@@ -120,7 +121,7 @@ describe('QAAgent', () => {
     it('should return error response on validation failure', async () => {
       const agent = new QAAgent();
       const invalidFeature = {
-        name: 'Test'
+        name: 'Test',
         // missing required fields
       };
 
@@ -135,7 +136,7 @@ describe('QAAgent', () => {
         name: 'Test Feature',
         description: 'Test description',
         type: 'task',
-        acceptanceCriteria: ['Criterion 1']
+        acceptanceCriteria: ['Criterion 1'],
       };
 
       // Mock the AI service to return invalid JSON
@@ -151,10 +152,10 @@ describe('QAAgent', () => {
     it('should analyze test coverage', async () => {
       const agent = new QAAgent();
       const testSuite = {
-        scenarios: []
+        scenarios: [],
       };
       const feature = {
-        acceptanceCriteria: ['Criterion 1', 'Criterion 2']
+        acceptanceCriteria: ['Criterion 1', 'Criterion 2'],
       };
 
       const coverage = await agent.analyzeCoverage(testSuite, feature);
