@@ -29,6 +29,10 @@ const options = {
     ],
     tags: [
       {
+        name: 'Health',
+        description: 'Endpoints para verificação de saúde da API',
+      },
+      {
         name: 'Scenarios',
         description: 'Endpoints para gerenciar cenários de teste',
       },

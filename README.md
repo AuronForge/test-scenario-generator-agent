@@ -24,16 +24,37 @@ This is the first agent in a multi-agent system designed to automate software de
 
 Access the interactive Swagger documentation:
 
-- **Local**: http://localhost:3000/docs
-- **Production**: https://your-app.vercel.app/docs
+- **Local**: http://localhost:3000/api/v1/api-docs
+- **Production**: https://test-scenario-generator-agent.vercel.app/api/v1/api-docs
+
+**Legacy endpoints** (redirected to v1):
+
+- http://localhost:3000/docs → /api/v1/api-docs
+- http://localhost:3000/ → /api/v1/api-docs
 
 The Swagger UI provides:
 
-- Complete API reference
+- Complete API reference with OpenAPI 3.0
 - Interactive request/response testing
 - Request/response examples
-- Schema definitions
+- Schema definitions with Zod validation
 - Try-it-out functionality
+- Multiple AI provider support
+
+### API Versioning
+
+All endpoints are versioned under `/api/v1` for stability and backward compatibility. Legacy non-versioned endpoints are automatically redirected to v1.
+
+### Postman Collection
+
+Import the complete API collection: [postman-collection.json](postman-collection.json)
+
+The collection includes:
+
+- All API endpoints with examples
+- Environment variables for local/production
+- Pre-configured headers and authentication
+- Test scenarios for error cases
 
 ## Installation
 
@@ -260,18 +281,44 @@ git push --follow-tags origin main
 ### Local Development
 
 ```bash
-npm run dev
+npm start
 ```
 
-The server will start at `http://localhost:3000`
+The server will start at `http://localhost:3000` using Vercel Dev
 
-**Access the API Documentation:** `http://localhost:3000/docs`
+**Access the API Documentation:** `http://localhost:3000/api/v1/api-docs`
 
 ### API Endpoints
 
+#### 0. Health Check
+
+**Endpoint:** `GET /api/v1/health`
+
+Returns API status, version, and available endpoints.
+
+**Response:**
+
+```json
+{
+  "status": "ok",
+  "service": "test-scenario-generator-agent",
+  "version": "1.0.0",
+  "apiVersion": "v1",
+  "timestamp": "2026-01-19T10:30:00.000Z",
+  "endpoints": {
+    "generateScenarios": "/api/v1/generate-scenarios",
+    "generatedScenarios": "/api/v1/generated-scenarios",
+    "swagger": "/api/v1/swagger",
+    "docs": "/api/v1/api-docs"
+  }
+}
+```
+
 #### 1. Generate Test Scenarios
 
-**Endpoint:** `POST /api/generate-scenarios`
+**Endpoint:** `POST /api/v1/generate-scenarios`
+
+**Legacy:** `POST /api/generate-scenarios` (redirected to v1)
 
 **Headers:**
 
@@ -289,18 +336,32 @@ The server will start at `http://localhost:3000`
 
 #### 2. List Generated Scenarios
 
-**Endpoint:** `GET /api/generated-scenarios`
+**Endpoint:** `GET /api/v1/generated-scenarios`
+
+**Legacy:** `GET /api/generated-scenarios` (redirected to v1)
 
 **Query Parameters:**
 
 - `id` (optional): ID do cenário específico
 
+#### 3. API Documentation
+
+**Swagger Spec:** `GET /api/v1/swagger` - Returns OpenAPI 3.0 JSON specification
+
+**Swagger UI:** `GET /api/v1/api-docs` - Interactive documentation interface
+
 ### API Request Examples
 
-**Using GitHub Models (Recommended):**
+**Health Check:**
 
 ```bash
-curl -X POST http://localhost:3000/api/generate-scenarios \
+curl http://localhost:3000/api/v1/health
+```
+
+**Using GitHub Models (Recommended - Free!):**
+
+```bash
+curl -X POST http://localhost:3000/api/v1/generate-scenarios \
   -H "Content-Type: application/json" \
   -H "x-ai-provider: github" \
   -d @tests/mocks/feature-example.json
@@ -309,22 +370,38 @@ curl -X POST http://localhost:3000/api/generate-scenarios \
 **Using OpenAI:**
 
 ```bash
-curl -X POST http://localhost:3000/api/generate-scenarios \
+curl -X POST http://localhost:3000/api/v1/generate-scenarios \
   -H "Content-Type: application/json" \
   -H "x-ai-provider: openai" \
+  -d @tests/mocks/feature-example.json
+```
+
+**Using Anthropic Claude:**
+
+```bash
+curl -X POST http://localhost:3000/api/v1/generate-scenarios \
+  -H "Content-Type: application/json" \
+  -H "x-ai-provider: anthropic" \
   -d @tests/mocks/feature-example.json
 ```
 
 **List all scenarios:**
 
 ```bash
-curl http://localhost:3000/api/generated-scenarios
+curl http://localhost:3000/api/v1/generated-scenarios
 ```
 
 **Get specific scenario:**
 
 ```bash
-curl "http://localhost:3000/api/generated-scenarios?id=uuid-123"
+curl "http://localhost:3000/api/v1/generated-scenarios?id=uuid-123"
+```
+
+**View API Documentation:**
+
+```bash
+# Open in browser
+open http://localhost:3000/api/v1/api-docs
 ```
 
 ### Programmatic Usage
@@ -349,9 +426,28 @@ console.log(result.data.scenarios);
 
 ## API Documentation
 
-### POST `/api/generate-scenarios`
+### GET `/api/v1/health`
+
+Health check endpoint - returns API status and available endpoints.
+
+**Response:**
+
+```json
+{
+  "status": "ok",
+  "service": "test-scenario-generator-agent",
+  "version": "1.0.0",
+  "apiVersion": "v1",
+  "timestamp": "2026-01-19T10:30:00.000Z",
+  "endpoints": {...}
+}
+```
+
+### POST `/api/v1/generate-scenarios`
 
 Generate test scenarios from a feature specification.
+
+**Legacy Endpoint:** `/api/generate-scenarios` (automatically redirected)
 
 **Headers:**
 
@@ -383,9 +479,11 @@ Generate test scenarios from a feature specification.
 }
 ```
 
-### GET `/api/generated-scenarios`
+### GET `/api/v1/generated-scenarios`
 
 List all generated test scenarios.
+
+**Legacy Endpoint:** `/api/generated-scenarios` (automatically redirected)
 
 **Query Parameters:**
 
@@ -432,22 +530,23 @@ List all generated test scenarios.
 
 ```bash
 # List all scenarios
-curl http://localhost:3000/api/generated-scenarios
+curl http://localhost:3000/api/v1/generated-scenarios
 
 # Get specific scenario
-curl http://localhost:3000/api/generated-scenarios?id=550e8400-e29b-41d4-a716-446655440000
+curl "http://localhost:3000/api/v1/generated-scenarios?id=550e8400-e29b-41d4-a716-446655440000"
 ```
 
-### POST `/api/generate-scenarios` (Legacy Headers)
+### GET `/api/v1/swagger`
 
-Generate test scenarios from a feature specification.
+Returns the OpenAPI 3.0 specification in JSON format.
 
-**Headers:**
+### GET `/api/v1/api-docs`
 
-- `Content-Type: application/json`
-- `x-ai-provider: openai|github|anthropic` (optional, default: openai)
+Interactive Swagger UI documentation page.
 
-**Request Body:**
+### Request Body Schema
+
+For `POST /api/v1/generate-scenarios`:
 
 ```json
 {

@@ -9,7 +9,11 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/api/v1/docs.js"
+      "destination": "/api/v1/api-docs.js"
+    },
+    {
+      "source": "/api/v1/api-docs",
+      "destination": "/api/v1/api-docs.js"
     },
     {
       "source": "/api/v1/generate-scenarios",
@@ -25,11 +29,11 @@
     },
     {
       "source": "/api/v1/docs",
-      "destination": "/api/v1/docs.js"
+      "destination": "/api/v1/api-docs.js"
     },
     {
       "source": "/docs",
-      "destination": "/api/v1/docs.js"
+      "destination": "/api/v1/api-docs.js"
     },
     {
       "source": "/api/v1/health",
