@@ -1,0 +1,678 @@
+{
+  "info": {
+    "name": "Test Scenario Generator Agent API",
+    "description": "AI-powered API for generating comprehensive test scenarios from feature descriptions. Supports multiple AI providers (GitHub Models, OpenAI, Anthropic) and includes auto-save to database.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "PROD_URL",
+      "value": "https://test-scenario-generator-agent.vercel.app",
+      "type": "string"
+    },
+    {
+      "key": "AI_PROVIDER",
+      "value": "github",
+      "type": "string",
+      "description": "AI Provider: github, openai, or anthropic"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health & Documentation",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/health",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "health"]
+            },
+            "description": "Verifica se a API está funcionando corretamente"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/health",
+                  "host": ["{{BASE_URL}}"],
+                  "path": ["api", "health"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"ok\",\n  \"service\": \"test-scenario-generator-agent\",\n  \"version\": \"1.0.0\",\n  \"timestamp\": \"2026-01-19T20:00:00.000Z\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "API Documentation (Swagger UI)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/docs",
+              "host": ["{{BASE_URL}}"],
+              "path": ["docs"]
+            },
+            "description": "Acessa a documentação interativa Swagger UI"
+          },
+          "response": []
+        },
+        {
+          "name": "Swagger JSON Spec",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/swagger",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "swagger"]
+            },
+            "description": "Retorna a especificação OpenAPI 3.0 em JSON"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de saúde e documentação da API"
+    },
+    {
+      "name": "Generate Scenarios",
+      "item": [
+        {
+          "name": "Generate Scenarios - User Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-ai-provider",
+                "value": "{{AI_PROVIDER}}",
+                "type": "text",
+                "description": "AI Provider: github, openai, or anthropic"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"User Login\",\n  \"description\": \"Funcionalidade de autenticação de usuários no sistema com validação de credenciais e controle de sessão\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "generate-scenarios"]
+            },
+            "description": "Gera cenários de teste para uma feature de login de usuário"
+          },
+          "response": [
+            {
+              "name": "Success - User Login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "x-ai-provider",
+                    "value": "github"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"User Login\",\n  \"description\": \"Funcionalidade de autenticação de usuários no sistema com validação de credenciais\"\n}"
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/generate-scenarios",
+                  "host": ["{{BASE_URL}}"],
+                  "path": ["api", "generate-scenarios"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"feature\": {\n    \"name\": \"User Login\",\n    \"description\": \"Funcionalidade de autenticação de usuários no sistema com validação de credenciais\"\n  },\n  \"scenarios\": [\n    {\n      \"type\": \"functional\",\n      \"description\": \"Login com credenciais válidas\",\n      \"steps\": [\n        \"Acessar página de login\",\n        \"Preencher email válido\",\n        \"Preencher senha correta\",\n        \"Clicar em 'Entrar'\"\n      ],\n      \"expectedResult\": \"Usuário é autenticado e redirecionado para dashboard\"\n    },\n    {\n      \"type\": \"functional\",\n      \"description\": \"Login com senha incorreta\",\n      \"steps\": [\n        \"Acessar página de login\",\n        \"Preencher email válido\",\n        \"Preencher senha incorreta\",\n        \"Clicar em 'Entrar'\"\n      ],\n      \"expectedResult\": \"Sistema exibe mensagem de erro 'Credenciais inválidas'\"\n    }\n  ],\n  \"coverage\": {\n    \"functional\": 3,\n    \"integration\": 2,\n    \"e2e\": 1,\n    \"edgeCases\": 2\n  },\n  \"metadata\": {\n    \"generatedAt\": \"2026-01-19T20:00:00.000Z\",\n    \"scenarioId\": \"sc_abc123\",\n    \"aiProvider\": \"github\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Generate Scenarios - E-commerce Checkout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-ai-provider",
+                "value": "{{AI_PROVIDER}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"E-commerce Checkout\",\n  \"description\": \"Processo completo de finalização de compra incluindo seleção de produtos, cálculo de frete, aplicação de cupons, pagamento e confirmação do pedido\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "generate-scenarios"]
+            },
+            "description": "Gera cenários de teste para feature de checkout de e-commerce"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Scenarios - API Integration",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-ai-provider",
+                "value": "{{AI_PROVIDER}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Payment Gateway Integration\",\n  \"description\": \"Integração com gateway de pagamento para processar transações com cartão de crédito, débito e PIX\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "generate-scenarios"]
+            },
+            "description": "Gera cenários de teste para integração com gateway de pagamento"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Scenarios - With OpenAI",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-ai-provider",
+                "value": "openai",
+                "type": "text",
+                "description": "Use OpenAI provider"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Password Recovery\",\n  \"description\": \"Funcionalidade de recuperação de senha por email com token de validação\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "generate-scenarios"]
+            },
+            "description": "Exemplo usando OpenAI como provider"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Scenarios - With Anthropic",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-ai-provider",
+                "value": "anthropic",
+                "type": "text",
+                "description": "Use Anthropic Claude"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"File Upload\",\n  \"description\": \"Funcionalidade de upload de arquivos com validação de tipo, tamanho e processamento assíncrono\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "generate-scenarios"]
+            },
+            "description": "Exemplo usando Anthropic Claude como provider"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints para geração de cenários de teste"
+    },
+    {
+      "name": "Retrieve Scenarios",
+      "item": [
+        {
+          "name": "List All Scenarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/generated-scenarios",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "generated-scenarios"]
+            },
+            "description": "Lista todos os cenários de teste gerados e salvos no banco de dados"
+          },
+          "response": [
+            {
+              "name": "Success - All Scenarios",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/generated-scenarios",
+                  "host": ["{{BASE_URL}}"],
+                  "path": ["api", "generated-scenarios"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"total\": 2,\n  \"data\": [\n    {\n      \"id\": \"sc_abc123\",\n      \"feature\": {\n        \"name\": \"User Login\",\n        \"description\": \"Funcionalidade de autenticação\"\n      },\n      \"scenariosCount\": 8,\n      \"createdAt\": \"2026-01-19T19:30:00.000Z\",\n      \"aiProvider\": \"github\"\n    },\n    {\n      \"id\": \"sc_def456\",\n      \"feature\": {\n        \"name\": \"Checkout Process\",\n        \"description\": \"Finalização de compra\"\n      },\n      \"scenariosCount\": 12,\n      \"createdAt\": \"2026-01-19T18:45:00.000Z\",\n      \"aiProvider\": \"openai\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Scenario by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/generated-scenarios?id=sc_abc123",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "generated-scenarios"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "sc_abc123",
+                  "description": "ID do cenário a ser recuperado"
+                }
+              ]
+            },
+            "description": "Recupera um cenário específico pelo ID"
+          },
+          "response": [
+            {
+              "name": "Success - Single Scenario",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/generated-scenarios?id=sc_abc123",
+                  "host": ["{{BASE_URL}}"],
+                  "path": ["api", "generated-scenarios"],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "sc_abc123"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"sc_abc123\",\n    \"feature\": {\n      \"name\": \"User Login\",\n      \"description\": \"Funcionalidade de autenticação de usuários\"\n    },\n    \"scenarios\": [\n      {\n        \"type\": \"functional\",\n        \"description\": \"Login com credenciais válidas\",\n        \"steps\": [\n          \"Acessar página de login\",\n          \"Preencher email válido\",\n          \"Preencher senha correta\",\n          \"Clicar em 'Entrar'\"\n        ],\n        \"expectedResult\": \"Usuário autenticado com sucesso\"\n      }\n    ],\n    \"coverage\": {\n      \"functional\": 3,\n      \"integration\": 2,\n      \"e2e\": 1,\n      \"edgeCases\": 2\n    },\n    \"metadata\": {\n      \"generatedAt\": \"2026-01-19T19:30:00.000Z\",\n      \"aiProvider\": \"github\"\n    }\n  }\n}"
+            },
+            {
+              "name": "Error - Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/generated-scenarios?id=invalid_id",
+                  "host": ["{{BASE_URL}}"],
+                  "path": ["api", "generated-scenarios"],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "invalid_id"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"Scenario not found\"\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Endpoints para recuperar cenários salvos"
+    },
+    {
+      "name": "Legacy Endpoint",
+      "item": [
+        {
+          "name": "Generate Tests (Legacy)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-ai-provider",
+                "value": "{{AI_PROVIDER}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"User Registration\",\n  \"description\": \"Funcionalidade de cadastro de novos usuários com validação de email e senha forte\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/generate-tests",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "generate-tests"]
+            },
+            "description": "Endpoint legado para gerar testes. Use /api/generate-scenarios ao invés."
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints legados mantidos para retrocompatibilidade"
+    },
+    {
+      "name": "Error Cases",
+      "item": [
+        {
+          "name": "Invalid Input - Missing Name",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-ai-provider",
+                "value": "{{AI_PROVIDER}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Teste sem nome da feature\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "generate-scenarios"]
+            },
+            "description": "Testa validação de entrada - nome obrigatório"
+          },
+          "response": [
+            {
+              "name": "Validation Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"Teste sem nome\"\n}"
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/generate-scenarios",
+                  "host": ["{{BASE_URL}}"],
+                  "path": ["api", "generate-scenarios"]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"Validation error\",\n  \"details\": [\n    {\n      \"field\": \"name\",\n      \"message\": \"Required\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Invalid Input - Empty Description",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-ai-provider",
+                "value": "{{AI_PROVIDER}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Feature\",\n  \"description\": \"\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "generate-scenarios"]
+            },
+            "description": "Testa validação - descrição não pode ser vazia"
+          },
+          "response": []
+        },
+        {
+          "name": "Method Not Allowed",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "generate-scenarios"]
+            },
+            "description": "Testa erro 405 - método GET não permitido"
+          },
+          "response": [
+            {
+              "name": "Method Not Allowed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/generate-scenarios",
+                  "host": ["{{BASE_URL}}"],
+                  "path": ["api", "generate-scenarios"]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Method not allowed\"\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Testes de casos de erro e validação"
+    },
+    {
+      "name": "Production Endpoints",
+      "item": [
+        {
+          "name": "PROD - Generate Scenarios",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-ai-provider",
+                "value": "github",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Shopping Cart\",\n  \"description\": \"Funcionalidade de carrinho de compras com adição, remoção e atualização de itens\"\n}"
+            },
+            "url": {
+              "raw": "{{PROD_URL}}/api/generate-scenarios",
+              "host": ["{{PROD_URL}}"],
+              "path": ["api", "generate-scenarios"]
+            },
+            "description": "Endpoint de produção no Vercel"
+          },
+          "response": []
+        },
+        {
+          "name": "PROD - List All Scenarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{PROD_URL}}/api/generated-scenarios",
+              "host": ["{{PROD_URL}}"],
+              "path": ["api", "generated-scenarios"]
+            },
+            "description": "Lista cenários em produção"
+          },
+          "response": []
+        },
+        {
+          "name": "PROD - Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{PROD_URL}}/api/health",
+              "host": ["{{PROD_URL}}"],
+              "path": ["api", "health"]
+            },
+            "description": "Verifica saúde da API em produção"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de produção (Vercel)"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Log request details",
+          "console.log('Request URL:', pm.request.url.toString());",
+          "console.log('AI Provider:', pm.variables.get('AI_PROVIDER'));"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Common tests for all requests",
+          "pm.test('Response time is less than 30s', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(30000);",
+          "});",
+          "",
+          "pm.test('Content-Type is application/json', function () {",
+          "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+          "});",
+          "",
+          "// Test successful responses",
+          "if (pm.response.code === 200 || pm.response.code === 201) {",
+          "    pm.test('Response has success field', function () {",
+          "        const jsonData = pm.response.json();",
+          "        pm.expect(jsonData).to.have.property('success');",
+          "    });",
+          "}"
+        ]
+      }
+    }
+  ]
+}
