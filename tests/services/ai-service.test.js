@@ -90,11 +90,10 @@ describe('AIService', () => {
       await expect(service.generateCompletion('test prompt')).rejects.toThrow('AI Service Error');
     });
 
-    it('should return undefined for unknown provider', async () => {
-      const service = new AIService('unknown-provider');
-
-      const result = await service.generateCompletion('test prompt');
-      expect(result).toBeUndefined();
+    it('should throw error for unknown provider', () => {
+      expect(() => new AIService('unknown-provider')).toThrow(
+        'Invalid AI provider: unknown-provider. Supported: openai, github, anthropic'
+      );
     });
   });
 

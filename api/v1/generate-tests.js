@@ -1,4 +1,4 @@
-import { QAAgent } from '../src/agents/qa-agent.js';
+import { QAAgent } from '../../src/agents/qa-agent.js';
 import fs from 'fs';
 import path from 'path';
 

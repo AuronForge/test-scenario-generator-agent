@@ -5,8 +5,9 @@
   "main": "api/generate-tests.js",
   "type": "module",
   "scripts": {
-    "commit": "cz",
+    "start": "vercel dev",
     "dev": "vercel dev",
+    "commit": "cz",
     "format": "prettier --write \"**/*.{js,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,json,md}\"",
     "lint": "eslint src/ api/ tests/",

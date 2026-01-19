@@ -8,20 +8,52 @@
   ],
   "rewrites": [
     {
-      "source": "/api/generate-scenarios",
-      "destination": "/api/generate-scenarios.js"
+      "source": "/",
+      "destination": "/api/v1/docs.js"
     },
     {
-      "source": "/api/generated-scenarios",
-      "destination": "/api/generated-scenarios.js"
+      "source": "/api/v1/generate-scenarios",
+      "destination": "/api/v1/generate-scenarios.js"
     },
     {
-      "source": "/api/swagger",
-      "destination": "/api/swagger.js"
+      "source": "/api/v1/generated-scenarios",
+      "destination": "/api/v1/generated-scenarios.js"
+    },
+    {
+      "source": "/api/v1/swagger",
+      "destination": "/api/v1/swagger.js"
+    },
+    {
+      "source": "/api/v1/docs",
+      "destination": "/api/v1/docs.js"
     },
     {
       "source": "/docs",
-      "destination": "/api/docs.js"
+      "destination": "/api/v1/docs.js"
+    },
+    {
+      "source": "/api/v1/health",
+      "destination": "/api/v1/health.js"
+    },
+    {
+      "source": "/api/v1/generate-tests",
+      "destination": "/api/v1/generate-tests.js"
+    },
+    {
+      "source": "/api/generate-scenarios",
+      "destination": "/api/v1/generate-scenarios.js"
+    },
+    {
+      "source": "/api/generated-scenarios",
+      "destination": "/api/v1/generated-scenarios.js"
+    },
+    {
+      "source": "/api/swagger",
+      "destination": "/api/v1/swagger.js"
+    },
+    {
+      "source": "/api/generate-tests",
+      "destination": "/api/v1/generate-tests.js"
     }
   ],
   "env": {

@@ -1,8 +1,8 @@
-import * as scenarioController from '../src/controllers/scenario.controller.js';
+import * as scenarioController from '../../src/controllers/scenario.controller.js';
 
 /**
  * @swagger
- * /api/generate-scenarios:
+ * /api/v1/generate-scenarios:
  *   post:
  *     summary: Gera cenários de teste a partir de uma feature
  *     description: Utiliza IA para gerar automaticamente cenários de teste detalhados baseados na descrição de uma feature. Suporta múltiplos provedores de IA.

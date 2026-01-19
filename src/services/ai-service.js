@@ -6,21 +6,32 @@ export class AIService {
     this.provider = provider;
 
     if (provider === 'openai') {
+      if (!process.env.OPENAI_API_KEY) {
+        throw new Error('OPENAI_API_KEY is not configured in environment variables');
+      }
       this.client = new OpenAI({
         apiKey: process.env.OPENAI_API_KEY,
       });
       this.model = process.env.OPENAI_MODEL || 'gpt-4-turbo-preview';
     } else if (provider === 'github') {
+      if (!process.env.GITHUB_TOKEN) {
+        throw new Error('GITHUB_TOKEN is not configured in environment variables');
+      }
       this.client = new OpenAI({
         apiKey: process.env.GITHUB_TOKEN,
         baseURL: 'https://models.inference.ai.azure.com',
       });
       this.model = process.env.GITHUB_MODEL || 'gpt-4o';
     } else if (provider === 'anthropic') {
+      if (!process.env.ANTHROPIC_API_KEY) {
+        throw new Error('ANTHROPIC_API_KEY is not configured in environment variables');
+      }
       this.client = new Anthropic({
         apiKey: process.env.ANTHROPIC_API_KEY,
       });
       this.model = process.env.ANTHROPIC_MODEL || 'claude-3-5-sonnet-20241022';
+    } else {
+      throw new Error(`Invalid AI provider: ${provider}. Supported: openai, github, anthropic`);
     }
   }
 
@@ -31,8 +42,10 @@ export class AIService {
       } else if (this.provider === 'anthropic') {
         return await this.generateAnthropicCompletion(prompt, options);
       }
+
+      throw new Error(`Unsupported provider: ${this.provider}`);
     } catch (error) {
-      throw new Error(`AI Service Error: ${error.message}`);
+      throw new Error(`AI Service Error (${this.provider}): ${error.message}`);
     }
   }
 

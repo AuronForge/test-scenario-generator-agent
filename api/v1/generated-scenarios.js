@@ -1,8 +1,8 @@
-import * as scenarioController from '../src/controllers/scenario.controller.js';
+import * as scenarioController from '../../src/controllers/scenario.controller.js';
 
 /**
  * @swagger
- * /api/generated-scenarios:
+ * /api/v1/generated-scenarios:
  *   get:
  *     summary: Lista cenários gerados ou recupera um cenário específico
  *     description: Retorna todos os cenários de teste gerados ou um cenário específico pelo ID. Os cenários são salvos automaticamente no banco de dados após a geração.

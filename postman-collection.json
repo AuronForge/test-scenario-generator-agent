@@ -33,7 +33,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{BASE_URL}}/api/health",
+              "raw": "{{BASE_URL}}/api/v1/health",
               "host": ["{{BASE_URL}}"],
               "path": ["api", "health"]
             },
@@ -46,7 +46,7 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{BASE_URL}}/api/health",
+                  "raw": "{{BASE_URL}}/api/v1/health",
                   "host": ["{{BASE_URL}}"],
                   "path": ["api", "health"]
                 }
@@ -70,7 +70,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{BASE_URL}}/docs",
+              "raw": "{{BASE_URL}}/api/v1/docs",
               "host": ["{{BASE_URL}}"],
               "path": ["docs"]
             },
@@ -84,7 +84,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{BASE_URL}}/api/swagger",
+              "raw": "{{BASE_URL}}/api/v1/swagger",
               "host": ["{{BASE_URL}}"],
               "path": ["api", "swagger"]
             },
@@ -120,7 +120,7 @@
               "raw": "{\n  \"name\": \"User Login\",\n  \"description\": \"Funcionalidade de autenticação de usuários no sistema com validação de credenciais e controle de sessão\"\n}"
             },
             "url": {
-              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "raw": "{{BASE_URL}}/api/v1/generate-scenarios",
               "host": ["{{BASE_URL}}"],
               "path": ["api", "generate-scenarios"]
             },
@@ -146,7 +146,7 @@
                   "raw": "{\n  \"name\": \"User Login\",\n  \"description\": \"Funcionalidade de autenticação de usuários no sistema com validação de credenciais\"\n}"
                 },
                 "url": {
-                  "raw": "{{BASE_URL}}/api/generate-scenarios",
+                  "raw": "{{BASE_URL}}/api/v1/generate-scenarios",
                   "host": ["{{BASE_URL}}"],
                   "path": ["api", "generate-scenarios"]
                 }
@@ -185,7 +185,7 @@
               "raw": "{\n  \"name\": \"E-commerce Checkout\",\n  \"description\": \"Processo completo de finalização de compra incluindo seleção de produtos, cálculo de frete, aplicação de cupons, pagamento e confirmação do pedido\"\n}"
             },
             "url": {
-              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "raw": "{{BASE_URL}}/api/v1/generate-scenarios",
               "host": ["{{BASE_URL}}"],
               "path": ["api", "generate-scenarios"]
             },
@@ -214,7 +214,7 @@
               "raw": "{\n  \"name\": \"Payment Gateway Integration\",\n  \"description\": \"Integração com gateway de pagamento para processar transações com cartão de crédito, débito e PIX\"\n}"
             },
             "url": {
-              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "raw": "{{BASE_URL}}/api/v1/generate-scenarios",
               "host": ["{{BASE_URL}}"],
               "path": ["api", "generate-scenarios"]
             },
@@ -244,7 +244,7 @@
               "raw": "{\n  \"name\": \"Password Recovery\",\n  \"description\": \"Funcionalidade de recuperação de senha por email com token de validação\"\n}"
             },
             "url": {
-              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "raw": "{{BASE_URL}}/api/v1/generate-scenarios",
               "host": ["{{BASE_URL}}"],
               "path": ["api", "generate-scenarios"]
             },
@@ -274,7 +274,7 @@
               "raw": "{\n  \"name\": \"File Upload\",\n  \"description\": \"Funcionalidade de upload de arquivos com validação de tipo, tamanho e processamento assíncrono\"\n}"
             },
             "url": {
-              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "raw": "{{BASE_URL}}/api/v1/generate-scenarios",
               "host": ["{{BASE_URL}}"],
               "path": ["api", "generate-scenarios"]
             },
@@ -294,7 +294,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{BASE_URL}}/api/generated-scenarios",
+              "raw": "{{BASE_URL}}/api/v1/generated-scenarios",
               "host": ["{{BASE_URL}}"],
               "path": ["api", "generated-scenarios"]
             },
@@ -307,7 +307,7 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{BASE_URL}}/api/generated-scenarios",
+                  "raw": "{{BASE_URL}}/api/v1/generated-scenarios",
                   "host": ["{{BASE_URL}}"],
                   "path": ["api", "generated-scenarios"]
                 }
@@ -331,7 +331,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{BASE_URL}}/api/generated-scenarios?id=sc_abc123",
+              "raw": "{{BASE_URL}}/api/v1/generated-scenarios?id=sc_abc123",
               "host": ["{{BASE_URL}}"],
               "path": ["api", "generated-scenarios"],
               "query": [
@@ -351,7 +351,7 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{BASE_URL}}/api/generated-scenarios?id=sc_abc123",
+                  "raw": "{{BASE_URL}}/api/v1/generated-scenarios?id=sc_abc123",
                   "host": ["{{BASE_URL}}"],
                   "path": ["api", "generated-scenarios"],
                   "query": [
@@ -379,7 +379,7 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{BASE_URL}}/api/generated-scenarios?id=invalid_id",
+                  "raw": "{{BASE_URL}}/api/v1/generated-scenarios?id=invalid_id",
                   "host": ["{{BASE_URL}}"],
                   "path": ["api", "generated-scenarios"],
                   "query": [
@@ -430,11 +430,11 @@
               "raw": "{\n  \"name\": \"User Registration\",\n  \"description\": \"Funcionalidade de cadastro de novos usuários com validação de email e senha forte\"\n}"
             },
             "url": {
-              "raw": "{{BASE_URL}}/api/generate-tests",
+              "raw": "{{BASE_URL}}/api/v1/generate-tests",
               "host": ["{{BASE_URL}}"],
-              "path": ["api", "generate-tests"]
+              "path": ["api", "v1", "generate-tests"]
             },
-            "description": "Endpoint legado para gerar testes. Use /api/generate-scenarios ao invés."
+            "description": "Endpoint legado para gerar testes. Use /api/v1/generate-scenarios ao invés."
           },
           "response": []
         }
@@ -465,7 +465,7 @@
               "raw": "{\n  \"description\": \"Teste sem nome da feature\"\n}"
             },
             "url": {
-              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "raw": "{{BASE_URL}}/api/v1/generate-scenarios",
               "host": ["{{BASE_URL}}"],
               "path": ["api", "generate-scenarios"]
             },
@@ -487,7 +487,7 @@
                   "raw": "{\n  \"description\": \"Teste sem nome\"\n}"
                 },
                 "url": {
-                  "raw": "{{BASE_URL}}/api/generate-scenarios",
+                  "raw": "{{BASE_URL}}/api/v1/generate-scenarios",
                   "host": ["{{BASE_URL}}"],
                   "path": ["api", "generate-scenarios"]
                 }
@@ -526,7 +526,7 @@
               "raw": "{\n  \"name\": \"Test Feature\",\n  \"description\": \"\"\n}"
             },
             "url": {
-              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "raw": "{{BASE_URL}}/api/v1/generate-scenarios",
               "host": ["{{BASE_URL}}"],
               "path": ["api", "generate-scenarios"]
             },
@@ -540,7 +540,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{BASE_URL}}/api/generate-scenarios",
+              "raw": "{{BASE_URL}}/api/v1/generate-scenarios",
               "host": ["{{BASE_URL}}"],
               "path": ["api", "generate-scenarios"]
             },
@@ -553,7 +553,7 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{BASE_URL}}/api/generate-scenarios",
+                  "raw": "{{BASE_URL}}/api/v1/generate-scenarios",
                   "host": ["{{BASE_URL}}"],
                   "path": ["api", "generate-scenarios"]
                 }
@@ -598,7 +598,7 @@
               "raw": "{\n  \"name\": \"Shopping Cart\",\n  \"description\": \"Funcionalidade de carrinho de compras com adição, remoção e atualização de itens\"\n}"
             },
             "url": {
-              "raw": "{{PROD_URL}}/api/generate-scenarios",
+              "raw": "{{PROD_URL}}/api/v1/generate-scenarios",
               "host": ["{{PROD_URL}}"],
               "path": ["api", "generate-scenarios"]
             },
@@ -612,7 +612,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{PROD_URL}}/api/generated-scenarios",
+              "raw": "{{PROD_URL}}/api/v1/generated-scenarios",
               "host": ["{{PROD_URL}}"],
               "path": ["api", "generated-scenarios"]
             },
@@ -626,7 +626,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{PROD_URL}}/api/health",
+              "raw": "{{PROD_URL}}/api/v1/health",
               "host": ["{{PROD_URL}}"],
               "path": ["api", "health"]
             },

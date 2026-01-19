@@ -19,11 +19,11 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
+        url: 'http://localhost:3000/api/v1',
         description: 'Development server',
       },
       {
-        url: 'https://test-scenario-generator-agent.vercel.app',
+        url: 'https://test-scenario-generator-agent.vercel.app/api/v1',
         description: 'Production server',
       },
     ],
@@ -234,7 +234,27 @@ const options = {
       },
     },
   },
-  apis: ['./api/*.js', './src/**/*.js'],
+  apis: ['./api/v1/*.js', './src/**/*.js'],
 };
 
-export const swaggerSpec = swaggerJsdoc(options);
+const swaggerSpec = swaggerJsdoc(options);
+
+/**
+ * Vercel serverless function handler for Swagger JSON spec
+ */
+export default function handler(req, res) {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  return res.status(200).json(swaggerSpec);
+}

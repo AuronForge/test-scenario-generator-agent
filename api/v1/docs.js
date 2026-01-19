@@ -43,7 +43,7 @@ export default function handler(req, res) {
     <script>
       window.onload = function () {
         const ui = SwaggerUIBundle({
-          url: '/api/swagger',
+          url: '/api/v1/swagger',
           dom_id: '#swagger-ui',
           deepLinking: true,
           presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
